@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
@@ -15,6 +17,7 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   var notesBox=Hive.box<NoteModel>(kNotesBox);
   await notesBox.add(note);
   emit(AddNoteSuccess());
+  log("the notes is ${Hive.box<NoteModel>(kNotesBox).values.toList()}");
  
 }  catch (e) {
    emit(AddNoteFailure(e.toString()));
